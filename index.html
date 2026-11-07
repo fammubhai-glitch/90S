@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+  }
+
+  /* NES Classic Grey & Black Controller Header */
+  .nes-wrapper {
+    width: 100%;
+    background: #c8c8c8;
+    border-bottom: 4px solid #cc0000;
+    padding: 6px 8px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+  }
+
+  .nes-faceplate {
+    background: #1a1a1a;
+    border: 2px solid #444;
+    border-radius: 4px;
+    padding: 5px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Left: Classic Cross D-Pad */
+  .dpad-box {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .dpad-h {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    width: 44px;
+    height: 16px;
+    background: #0a0a0a;
+    border: 1.5px solid #666;
+    box-sizing: border-box;
+  }
+  .dpad-v {
+    position: absolute;
+    top: 0;
+    left: 14px;
+    width: 16px;
+    height: 44px;
+    background: #0a0a0a;
+    border: 1.5px solid #666;
+    box-sizing: border-box;
+  }
+  .dpad-center {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 12px;
+    height: 12px;
+    background: #222;
+    border-radius: 50%;
+  }
+
+  /* Center: Hook + Select/Start + Real Timer */
+  .center-deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #8c8c8c;
+    padding: 4px 8px;
+    border-radius: 3px;
+    margin: 0 6px;
+    flex-grow: 1;
+    max-width: 62%;
+  }
+  .hook-title {
+    background: #111;
+    color: #ffcc00;
+    font-size: 14px;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 2px;
+    text-shadow: 1px 1px 0 #cc0000;
+    white-space: nowrap;
+    margin-bottom: 3px;
+  }
+  .mid-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #d4d4d4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid #555;
+  }
+  .pill-btn {
+    font-size: 8px;
+    font-weight: 900;
+    color: #cc0000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pill-shape {
+    width: 16px;
+    height: 5px;
+    background: #222;
+    border-radius: 4px;
+    margin-top: 1px;
+  }
+  .real-timer {
+    background: #000;
+    color: #00ff44;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 1px 5px;
+    border: 1px solid #333;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+  }
+  .cta-sub {
+    color: #111;
+    font-size: 10px;
+    font-weight: 900;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+  .brand-red {
+    color: #b30000;
+  }
+
+  /* Right: 4-Button Grid (Turbo B/A + Standard B/A) */
+  .ab-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px 5px;
+    background: #dcdcdc;
+    padding: 3px 5px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .btn-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .red-circle {
+    width: 17px;
+    height: 17px;
+    background: #e60012;
+    border-radius: 50%;
+    border: 1px solid #7a0009;
+    box-shadow: inset -1px -1px 2px rgba(0,0,0,0.5);
+  }
+  .turbo-circle {
+    background: #ff4500; /* Turbo buttons slight orange-red tint */
+  }
+  .ab-label {
+    color: #b30000;
+    font-size: 8px;
+    font-weight: 900;
+    line-height: 9px;
+    margin-top: 1px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="nes-wrapper">
+    <div class="nes-faceplate">
+      
+      <!-- Left: Contra/NES D-Pad -->
+      <div class="dpad-box">
+        <div class="dpad-h"></div>
+        <div class="dpad-v"></div>
+        <div class="dpad-center"></div>
+      </div>
+
+      <!-- Center: Hook + Select/Start + Timer -->
+      <div class="center-deck">
+        <div class="hook-title">🕹️ 90s TV VIDEO GAME</div>
+        <div class="mid-row">
+          <div class="pill-btn">SELECT<div class="pill-shape"></div></div>
+          <div class="real-timer" id="timer">00:00:00</div>
+          <div class="pill-btn">START<div class="pill-shape"></div></div>
+        </div>
+        <!-- Pammu nes ke liye | TGK ko | PAMMU kar lena -->
+        <div class="cta-sub">Next Game? Chat Karo! <span class="brand-red">| TGK</span></div>
+      </div>
+
+      <!-- Right: 4 Buttons (Turbo B, Turbo A + B, A) -->
+      <div class="ab-grid">
+        <div class="btn-cell">
+          <div class="red-circle turbo-circle"></div>
+          <span class="ab-label">T-B</span>
+        </div>
+        <div class="btn-cell">
+          <div class="red-circle turbo-circle"></div>
+          <span class="ab-label">T-A</span>
+        </div>
+        <div class="btn-cell">
+          <div class="red-circle"></div>
+          <span class="ab-label">B</span>
+        </div>
+        <div class="btn-cell">
+          <div class="red-circle"></div>
+          <span class="ab-label">A</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let seconds = 0;
+    function updateTimer() {
+      seconds++;
+      let hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
+      let mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+      let secs = String(seconds % 60).padStart(2, '0');
+      document.getElementById('timer').textContent = hrs + ":" + mins + ":" + secs;
+    }
+    setInterval(updateTimer, 1000);
+  </script>
+
+</body>
+</html>
